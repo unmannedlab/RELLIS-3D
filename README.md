@@ -1,2 +1,2 @@
-# ROAD
-the RELLIS Off-roAd Dataset (ROAD)
+# RELLIS-3D: An off-road Dataset
+

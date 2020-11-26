@@ -68,6 +68,8 @@ To visualize the color of the ply file, please use [CloudCompare](https://www.da
 
 **LiDAR SemanticKITTI Format** ([Download 14GB](https://drive.google.com/file/d/1lDSVRf_kZrD0zHHMsKJ0V1GN9QATR4wH/view?usp=sharing))
 
+To visualize the datasets using the SemanticKITTI tools, please use this fork: [https://github.com/unmannedlab/point_labeler](https://github.com/unmannedlab/point_labeler)
+
 **LiDAR Annotation SemanticKITTI Format** ([Download 174MB](https://drive.google.com/file/d/1LUmmO2imJ4m5uCtGv1FYusCo-bEPDbBx/view?usp=sharing))
 
 **LiDAR Scan Poses files** ([Download 174MB](https://drive.google.com/file/d/1cyVqJEnlzO9ANOP7hU8GJk28ckPDUSGv/view?usp=sharing))

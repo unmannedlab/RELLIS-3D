@@ -1,0 +1,124 @@
+# This file is covered by the LICENSE file in the root of this project.
+name: "rellis"
+labels:
+  0: "void"
+  1: "dirt"
+  3: "grass"
+  4: "tree"
+  5: "pole"
+  6: "water"
+  7: "sky"
+  8: "vehicle"
+  9: "object"
+  10: "asphalt"
+  12: "building"
+  15: "log"
+  17: "person"
+  18: "fence"
+  19: "bush"
+  23: "concrete"
+  27: "barrier"
+  31: "puddle"
+  33: "mud"
+  34: "rubble"
+color_map: # bgr
+  0: [0,0,0]
+  1: [108, 64, 20]
+  3: [0,102,0]
+  4: [0,255,0]
+  5: [0,153,153]
+  6: [0,128,255]
+  7: [0,0,255]
+  8: [255,255,0]
+  9: [255,0,127]
+  10: [64,64,64]
+  12: [255,0,0]
+  15: [102,0,0]
+  17: [204,153,255]
+  18: [102, 0, 204]
+  19: [255,153,204]
+  23: [170,170,170]
+  27: [41,121,255]
+  31: [134,255,239]
+  33: [99,66,34]
+  34: [110,22,138]
+content: # as a ratio with the total number of points
+  0: 447156890
+  1: 0
+  3: 261005182
+  4: 107172982
+  5: 22852
+  6: 224173
+  7: 0
+  8: 111345
+  9: 2
+  10: 479
+  12: 10
+  15: 554091
+  17: 10626325
+  18: 1588416
+  19: 168764964
+  23: 10944799
+  27: 3502156
+  31: 1493276
+  33: 5798200
+  34: 3395458
+# classes that are indistinguishable from single scan or inconsistent in
+# ground truth are mapped to their closest equivalent
+learning_map:
+  0: 0 #"void"
+  1: 0 #"dirt"
+  3: 1 #"grass"
+  4: 2 #"tree"
+  5: 3 #"pole"
+  6: 4 #"water"
+  7: 0 #"sky"
+  8: 5 #"vehicle"
+  9: 0 #"object"
+  10: 0 #"asphalt"
+  12: 0 #"building"
+  15: 6 #"log"
+  17: 7 #"person"
+  18: 8 #"fence"
+  19: 9 #"bush"
+  23: 10 #"concrete"
+  27: 11 #"barrier"
+  31: 12 #"puddle"
+  33: 13 #"mud"
+  34: 14 #"rubble"
+learning_map_inv: # inverse of previous map
+  0: 0 #"void"#"dirt"  5: 7 #"sky"9 #"object"10 #"asphalt"12 #"building"
+  1: 3 #"grass"
+  2: 4 #"tree"
+  3: 5 #"pole"
+  4: 6 #"water"
+  5: 8 #"vehicle"
+  6: 15 #"log"
+  7: 17 #"person"
+  8: 18 #"fence"
+  9: 19 #"bush"
+  10: 23 #"concrete"
+  11: 27 #"barrier"
+  12: 31 #"puddle"
+  13: 33 #"mud"
+  14: 34 #"rubble"
+learning_ignore: # Ignore classes
+  0: True #"void"#"dirt"
+  1: False #"grass"
+  2: False #"tree"
+  3: False #"pole"
+  4: False #"water"
+  5: False #"vehicle"
+  6: False #"object"
+  7: False #"asphalt"
+  8: False #"building"
+  9: False #"log"
+  10: False #"person"
+  11: False #"fence"
+  12: False #"bush"
+  13: False #"concrete"
+  14: False #"barrier"
+split: # sequence numbers
+  train: "pt_train.lst"
+  valid: "pt_val.lst"
+  test: "pt_test.lst"

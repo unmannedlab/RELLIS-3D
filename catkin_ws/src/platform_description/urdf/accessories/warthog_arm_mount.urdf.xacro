@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:macro name="warthog_arm_mount">
+    <link name="arm_mount_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://platform_description/meshes/arm-mount-plate.stl" />
+        </geometry>
+        <material name="light_grey"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://platform_description/meshes/arm-mount-plate.stl" />
+        </geometry>
+      </collision>
+      <inertial>
+        <origin xyz="0 0 -0.01" rpy="0 0 0"/>
+        <mass value="1.45"/>
+        <xacro:box_inertia m="1.45" x="0.16838" y="0.16838" z="0.02" />
+      </inertial>
+    </link>
+  </xacro:macro>
+</robot>

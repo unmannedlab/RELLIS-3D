@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package>
+  <name>platform_description</name>
+  <version>0.1.1</version>
+  <description>URDF robot description for Warthog</description>
+
+  <maintainer email="maskjp@tamu.edu">Peng Jiang</maintainer>
+
+  <license>BSD</license>
+
+  <author email="maskjp@tamu.edu">Peng Jiang</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roslaunch</build_depend>
+  <run_depend>robot_state_publisher</run_depend>
+  <run_depend>urdf</run_depend>
+  <run_depend>xacro</run_depend>
+
+  <export>
+  </export>
+</package>

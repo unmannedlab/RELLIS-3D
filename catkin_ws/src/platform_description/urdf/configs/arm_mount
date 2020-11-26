@@ -1,0 +1,4 @@
+# This config enables the bulkhead and the arm mounting plate
+
+WARTHOG_BULKHEAD=1
+WARTHOG_ARM_MOUNT=1

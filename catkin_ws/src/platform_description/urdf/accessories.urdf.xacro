@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!--
+    As you add to this URDF, please be aware that both the robot and
+    simulation include it. You must retain compatibility with all of
+    the following launch files:
+
+    warthog_viz/launch/view_model.launch
+    warthog_gazebo/launch/warthog_world.launch
+    warthog_base/launch/base.launch
+  -->
+
+  <!-- If enabled, generate a Novatel Smart6 payload. -->
+  <xacro:include filename="accessories/novatel_smart6.urdf.xacro" />
+  <xacro:if value="$(optenv WARTHOG_NAVSAT_SMART6 0)">
+    <novatel_smart6 prefix="$(optenv WARTHOG_NAVSAT_SMART6_MOUNT navsat)"/>
+
+    <joint name="$(optenv WARTHOG_NAVSAT_SMART6_MOUNT navsat)_joint" type="fixed">
+    <origin xyz="$(optenv WARTHOG_NAVSAT_SMART6_OFFSET 0 0 0)"
+            rpy="$(optenv WARTHOG_NAVSAT_SMART6_RPY 0 0 0)" />
+      <parent link="top_chassis_link" />
+      <child link="$(optenv WARTHOG_NAVSAT_SMART6_MOUNT navsat)_link" />
+    </joint>
+  </xacro:if>
+
+  <xacro:include filename="accessories/warthog_bulkhead.urdf.xacro" />
+  <xacro:if value="$(optenv WARTHOG_BULKHEAD 0)">
+    <warthog_bulkhead/>
+    <joint name="bulkhead_link_joint" type="fixed">
+      <origin xyz="0.00705 0 0.24184" rpy="0 0 0" />
+      <parent link="top_chassis_link"/>
+      <child link="bulkhead_link" />
+    </joint>
+
+    <joint name="bulkhead_front_mount_link_joint" type="fixed">
+      <origin xyz="0.33987 0 0.0" rpy="0 0 0" />
+      <parent link="bulkhead_link"/>
+      <child link="bulkhead_front_mount_link" />
+    </joint>
+
+    <xacro:include filename="accessories/warthog_arm_mount.urdf.xacro" />
+    <xacro:if value="$(optenv WARTHOG_ARM_MOUNT 0)">
+    <warthog_arm_mount/>
+    <joint name="arm_mount_link_joint" type="fixed">
+      <origin xyz="0 0 0.02" rpy="0 0 0" />
+      <parent link="bulkhead_front_mount_link"/>
+      <child link="arm_mount_link" />
+    </joint>
+    </xacro:if>
+  </xacro:if>
+</robot>

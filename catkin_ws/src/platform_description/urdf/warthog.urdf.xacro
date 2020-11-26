@@ -1,0 +1,365 @@
+<?xml version='1.0'?>
+
+<robot name="warthog" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:property name="PI" value="3.1415926535897931"/>
+
+  <xacro:property name="wheel_radius" value="0.3" />
+  <xacro:property name="wheel_width" value="0.25" />
+  <xacro:property name="wheel_mass" value="15" />
+  <xacro:property name="wheel_to_track_ratio" value="0.5962" />
+
+  <xacro:property name="axle_x_offset" value="0.457367" />
+  <xacro:property name="axle_y_offset" value="0.0" />
+  <xacro:property name="axle_z_offset" value="-0.012977" />
+
+  <xacro:property name="diff_unit_length" value="1.34" />
+  <xacro:property name="diff_unit_width" value="0.28" />
+  <xacro:property name="diff_unit_height" value="0.63"/>
+  <xacro:property name="diff_unit_mass" value="50" />
+
+  <xacro:property name="diff_unit_offset_x" value="0.00" />
+  <xacro:property name="diff_unit_offset_y" value="0.56821" />
+  <xacro:property name="diff_unit_offset_z" value="0.0" />
+
+  <xacro:property name="chassis_length" value="1.35" />
+  <xacro:property name="chassis_width" value="0.70" />
+  <xacro:property name="chassis_height" value="0.30" />
+  <xacro:property name="chassis_mass" value="100" />
+
+  <xacro:property name="dummy_inertia" value="1e-09"/>
+
+  <xacro:macro name="wheel_inertia" params="m r h">
+    <inertia ixx="${m*(3*r*r+h*h)/12}" ixy="0" ixz="0"
+             iyy="${m*r*r/2}" iyz="0"
+             izz="${m*(3*r*r+h*h)/12}" />
+  </xacro:macro>
+
+  <xacro:macro name="box_inertia" params="m x y z">
+    <inertia ixx="${m*(y*y+z*z)/12}" ixy="0" ixz="0"
+             iyy="${m*(x*x+z*z)/12}" iyz="0"
+             izz="${m*(x*x+z*z)/12}" />
+  </xacro:macro>
+
+  <material name="dark_grey"><color rgba="0.2 0.2 0.2 1.0" /></material>
+  <material name="light_grey"><color rgba="0.4 0.4 0.4 1.0" /></material>
+  <material name="yellow"><color rgba="0.95 0.816 0.082 1.0" /></material>
+  <material name="black"><color rgba="0.15 0.15 0.15 1.0" /></material>
+  <material name="white"><color rgba="0.9 0.9 0.9 1.0" /></material>
+  <material name="red"><color rgba="0.9 0.0 0.0 1.0" /></material>
+
+  <xacro:macro name="wheel" params="prefix side *joint_pose">
+    <link name="${prefix}_${side}_wheel_link">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <mass value="${wheel_mass}" />
+        <xacro:wheel_inertia m="${wheel_mass}" r="${wheel_radius}" h="${wheel_width}" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 ${PI/2}"/>
+        <geometry>
+          <mesh filename="package://platform_description/meshes/wheel.stl" />
+        </geometry>
+        <material name="dark_grey" />
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="${PI/2} 0 0"/>
+        <geometry>
+          <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}_${side}_wheel_joint" type="continuous">
+      <parent link="${side}_diff_unit_link"/>
+      <child link="${prefix}_${side}_wheel_link"/>
+      <xacro:insert_block name="joint_pose" />
+      <axis xyz="0 1 0"/>
+    </joint>
+    <gazebo reference="${prefix}_${side}_wheel_link">
+      <selfCollide>false</selfCollide>
+      <mu1>0.5</mu1>
+      <mu2>0.5</mu2>
+      <kp value="10000000.0" />
+      <kd value="1.0" />
+      <fdir1 value="1 0 0" />
+      <material>Gazebo/Grey</material>
+    </gazebo>
+    <transmission name="${prefix}_${side}_wheel_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}_${side}_wheel_joint">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}_${side}_actuator">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+  </xacro:macro>
+
+  <xacro:macro name="track" params="prefix side *joint_pose">
+    <link name="${prefix}_${side}_track_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://platform_description/meshes/tracks.dae" />
+        </geometry>
+        <material name="dark_grey" />
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://platform_description/meshes/tracks_collision.stl" />
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}_${side}_track_joint" type="fixed">
+      <parent link="${side}_diff_unit_link"/>
+      <child link="${prefix}_${side}_track_link"/>
+      <xacro:insert_block name="joint_pose" />
+      <axis xyz="0 1 0"/>
+    </joint>
+
+    <!-- This adds wheels that rotate instead of tracks. -->
+    <link name="${prefix}_${side}_wheel_link">
+      <collision>
+        <origin xyz="0 0 0" rpy="${PI/2} 0 0"/>
+        <geometry>
+          <cylinder radius="${wheel_radius*wheel_to_track_ratio}" length="${wheel_width}"/>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}_${side}_wheel_joint" type="continuous">
+      <parent link="${side}_diff_unit_link"/>
+      <child link="${prefix}_${side}_wheel_link"/>
+      <xacro:insert_block name="joint_pose" />
+      <axis xyz="0 1 0"/>
+    </joint>
+    <transmission name="${prefix}_${side}_wheel_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}_${side}_wheel_joint">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}_${side}_actuator">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+  </xacro:macro>
+
+  <xacro:unless value="$(optenv WARTHOG_TRACKS 0)">
+    <xacro:wheel prefix="front" side="left">
+      <origin xyz="${axle_x_offset*1} ${axle_y_offset*1} ${axle_z_offset}" rpy="0 0 0" />
+    </xacro:wheel>
+    <xacro:wheel prefix="front" side="right">
+      <origin xyz="${axle_x_offset*1} ${axle_y_offset*-1} ${axle_z_offset}" rpy="0 0 0" />
+    </xacro:wheel>
+    <xacro:wheel prefix="rear" side="left">
+      <origin xyz="${axle_x_offset*-1} ${axle_y_offset*1} ${axle_z_offset}" rpy="0 0 0" />
+    </xacro:wheel>
+    <xacro:wheel prefix="rear" side="right">
+      <origin xyz="${axle_x_offset*-1} ${axle_y_offset*-1} ${axle_z_offset}" rpy="0 0 0" />
+    </xacro:wheel>
+  </xacro:unless>
+
+  <xacro:if value="$(optenv WARTHOG_TRACKS 0)">
+    <xacro:track prefix="front" side="left">
+      <origin xyz="${axle_x_offset*1} ${axle_y_offset*1} ${axle_z_offset}" rpy="0 0 0" />
+    </xacro:track>
+    <xacro:track prefix="front" side="right">
+      <origin xyz="${axle_x_offset*1} ${axle_y_offset*-1} ${axle_z_offset}" rpy="0 0 0" />
+    </xacro:track>
+    <xacro:track prefix="rear" side="left">
+      <origin xyz="${axle_x_offset*-1} ${axle_y_offset*1} ${axle_z_offset}" rpy="0 0 ${PI}" />
+    </xacro:track>
+    <xacro:track prefix="rear" side="right">
+      <origin xyz="${axle_x_offset*-1} ${axle_y_offset*-1} ${axle_z_offset}" rpy="0 0 ${PI}" />
+    </xacro:track>
+  </xacro:if>
+
+  <xacro:macro name="diff_unit" params="prefix side left">
+    <link name="${prefix}_diff_unit_link">
+      <inertial>
+        <origin xyz="0 ${side*-1*0.05} 0.197" rpy="0 0 0"/>
+        <mass value="${diff_unit_mass}"/>
+        <xacro:box_inertia m="${diff_unit_mass}" x="${diff_unit_length}"
+                           y="${diff_unit_width}" z="${diff_unit_height}" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 ${side*PI/2}"/>
+        <geometry>
+          <mesh filename="package://platform_description/meshes/rocker.stl" />
+        </geometry>
+        <material name="black"><color rgba="0.15 0.15 0.15 1.0" /></material>
+      </visual>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 ${side*PI/2}"/>
+        <geometry>
+          <mesh filename="package://platform_description/meshes/fenders.stl" />
+        </geometry>
+        <material name="yellow"><color rgba="0.95 0.816 0.082 1.0" /></material>
+      </visual>
+      <visual>
+        <origin xyz="0 ${side*-0.0244} 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://platform_description/meshes/light.stl" />
+        </geometry>
+        <material name="white"><color rgba="0.9 0.9 0.9 1.0" /></material>
+      </visual>
+      <visual>
+        <origin xyz="0 ${side*-0.0244} 0" rpy="0 0 ${side*PI}"/>
+        <geometry>
+          <mesh filename="package://platform_description/meshes/light.stl" />
+        </geometry>
+        <material name="red"><color rgba="0.9 0.0 0.0 1.0" /></material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 ${side*PI/2}"/>
+        <geometry>
+          <mesh filename="package://platform_description/meshes/fenders.stl" />
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}_diff_unit_joint" type="revolute">
+      <limit upper="0.4" lower="-0.4" effort="100" velocity="1"/>
+      <parent link="chassis_link"/>
+      <child link="${prefix}_diff_unit_link"/>
+      <origin xyz="${diff_unit_offset_x} ${diff_unit_offset_y*side} ${diff_unit_offset_z}" rpy="0 0 0" />
+      <axis xyz="0 1 0"/>
+      <dynamics damping="100" friction="0.5"/>
+    </joint>
+    <gazebo reference="${prefix}_diff_unit_link">
+      <selfCollide>false</selfCollide>
+      <material>Gazebo/Yellow</material>
+    </gazebo>
+  </xacro:macro>
+
+  <xacro:diff_unit prefix="left" side="1" left="true"/>
+  <xacro:diff_unit prefix="right" side="-1" left="false"/>
+
+  <link name="base_link"></link>
+
+  <joint name="base_link_joint" type="fixed">
+    <origin xyz="0 0 0.025" rpy="0 0 0" />
+    <parent link="base_link"/>
+    <child link="chassis_link" />
+  </joint>
+
+  <link name="chassis_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="${chassis_mass}"/>
+      <xacro:box_inertia m="${chassis_mass}" x="${chassis_length}"
+                         y="${chassis_width}" z="${chassis_height}" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://platform_description/meshes/chassis.stl" />
+      </geometry>
+      <material name="black"><color rgba="0.15 0.15 0.15 1.0" /></material>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://platform_description/meshes/e-stop.stl" />
+      </geometry>
+      <material name="red"><color rgba="0.9 0.0 0.0 1.0" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://platform_description/meshes/chassis-collision.stl" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="top_chassis_link"></link>
+
+  <joint name="top_link_joint" type="fixed">
+    <origin xyz="0 0 0.27218" rpy="0 0 0" />
+    <parent link="chassis_link"/>
+    <child link="top_chassis_link" />
+  </joint>
+
+  <!-- This link is purely to complete the visual look -->
+  <link name="diff_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://platform_description/meshes/diff-link.stl" />
+      </geometry>
+      <material name="light_grey" />
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://platform_description/meshes/susp-link.stl" />
+      </geometry>
+      <material name="light_grey" />
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://platform_description/meshes/susp-link.stl" />
+      </geometry>
+      <material name="light_grey" />
+    </visual>
+  </link>
+  <joint name="diff_link_joint" type="fixed">
+    <parent link="chassis_link"/>
+    <child link="diff_link"/>
+    <origin xyz="-0.5826 0 0.24979" rpy="0 0 0" />
+  </joint>
+
+
+
+  <!-- Sensor Frame. -->
+  <link name="imu_link" />
+  <joint name="imu_link_joint" type="fixed">
+    <parent link="top_chassis_link"/>
+    <child link="imu_link" />
+    <origin xyz="-0.26 0 0.445" rpy="0 3.1415926 -3.1415926" />
+  </joint>
+  <link name="velodyne" />
+  <joint name="imu_to_velodyne" type="fixed">
+    <parent link="imu_link"/>
+    <child link="velodyne" />
+    <origin xyz="0.6 0 0" rpy="0 3.1415926 -3.1415926" />
+  </joint>
+  <link name="os1_frame" />
+  <joint name="os1_to_imu" type="fixed">
+    <parent link="imu_link"/>
+    <child link="os1_frame" />
+    <origin xyz="0.45 0 -0.07" rpy="0 3.1415926 0" />
+  </joint>
+  <link name="os1_sensor" />
+  <joint name="os1_sensor_to_os1_frame" type="fixed">
+    <parent link="os1_frame"/>
+    <child link="os1_sensor" />
+    <origin xyz="0 0 0" rpy="0 0 -3.1415926" />
+  </joint>
+
+  <link name="os1_lidar" />
+  <joint name="os1_lidar_to_os1_sensor" type="fixed">
+    <parent link="os1_sensor"/>
+    <child link="os1_lidar" />
+    <origin xyz="0 0 0.03618" rpy="0 0 -3.1415927" />
+  </joint>
+
+  <link name="os1_imu" />
+  <joint name="os1_imu_to_os1_sensor" type="fixed">
+    <parent link="os1_sensor"/>
+    <child link="os1_imu" />
+    <origin xyz="0.006253 -0.011775 0.007645" rpy="0 0 0" />
+  </joint>
+  <!-- Bring in simulation data for Gazebo. -->
+  <!--xacro:include filename="$(find platform_description)/urdf/warthog.gazebo" /-->
+
+  <!-- Optional standard accessories, including their simulation data. The rendering
+       of these into the final description is controlled by optenv variables, which
+       default each one to off.-->
+  <!--xacro:include filename="$(find platform_description)/urdf/accessories.urdf.xacro" /-->
+
+  <!-- Optional custom includes. -->
+  <!--xacro:include filename="$(optenv WARTHOG_URDF_EXTRAS empty.urdf)" /-->
+</robot>

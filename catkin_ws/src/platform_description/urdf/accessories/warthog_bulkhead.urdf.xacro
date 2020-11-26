@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="warthog_bulkhead">
+    <link name="bulkhead_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://platform_description/meshes/bulkhead.stl" />
+        </geometry>
+        <material name="black"><color rgba="0.15 0.15 0.15 1.0" /></material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://platform_description/meshes/bulkhead-collision.stl" />
+        </geometry>
+      </collision>
+      <inertial>
+        <origin xyz="0.35915 0 -0.6956" rpy="0 0 0"/>
+        <mass value="14.38835"/>
+        <inertia ixx="1.13395" ixy="0.0" ixz="-0.42719" iyy="2.59727" iyz="0.0" izz="3.42344"/>
+      </inertial>
+    </link>
+
+    <link name="bulkhead_front_mount_link"/>
+  </xacro:macro>
+</robot>

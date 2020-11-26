@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<robot>
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/</robotNamespace>
+    </plugin>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="warthog_suspension_plugin" filename="libwarthog_suspension_plugin.so">
+      <suspension_k>10000</suspension_k>
+      <suspension_b>500</suspension_b>
+    </plugin>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
+      <robotNamespace>/</robotNamespace>
+      <updateRate>50.0</updateRate>
+      <bodyName>imu_link</bodyName>
+      <topicName>imu/data</topicName>
+      <accelDrift>0.005 0.005 0.005</accelDrift>
+      <accelGaussianNoise>0.005 0.005 0.005</accelGaussianNoise>
+      <rateDrift>0.005 0.005 0.005 </rateDrift>
+      <rateGaussianNoise>0.005 0.005 0.005 </rateGaussianNoise>
+      <headingDrift>0.005</headingDrift>
+      <headingGaussianNoise>0.005</headingGaussianNoise>
+    </plugin>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="gps_controller" filename="libhector_gazebo_ros_gps.so">
+      <updateRate>20</updateRate>
+      <robotNamespace>/</robotNamespace>
+      <bodyName>base_link</bodyName>
+      <frameId>base_link</frameId>
+      <topicName>/navsat/fix</topicName>
+      <velocityTopicName>/navsat/vel</velocityTopicName>
+      <referenceLatitude>49.9</referenceLatitude>
+      <referenceLongitude>8.9</referenceLongitude>
+      <referenceHeading>0</referenceHeading>
+      <referenceAltitude>0</referenceAltitude>
+      <drift>0.0001 0.0001 0.0001</drift>
+    </plugin>
+  </gazebo>
+
+  <gazebo reference="base_link">
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+  <gazebo reference="chassis_link"><material>Gazebo/Black</material></gazebo>
+  <gazebo reference="diff_link"><material>Gazebo/Grey</material></gazebo>
+  <gazebo reference="bulkhead_link"><material>Gazebo/Black</material></gazebo>
+  <gazebo reference="arm_mount_link"><material>Gazebo/Grey</material></gazebo>
+</robot>

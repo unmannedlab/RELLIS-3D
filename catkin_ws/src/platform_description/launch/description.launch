@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="config" default="base" />
+
+  <param name="robot_description"
+         command="$(find platform_description)/scripts/env_run
+                  $(find platform_description)/urdf/configs/$(arg config)
+                  $(find xacro)/xacro $(find platform_description)/urdf/warthog.urdf.xacro
+                  --inorder" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+</launch>

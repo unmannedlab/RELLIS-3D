@@ -1,0 +1,3 @@
+# This config enables the bulkhead for mounting other components
+
+WARTHOG_BULKHEAD=1

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="novatel_smart6" params="prefix">
+  <link name="${prefix}_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://platform_description/meshes/novatel-smart6.stl"/>
+      </geometry>
+      <material name="novatel_white">
+        <color rgba="0.8 0.8 0.8 1.0" />
+      </material>
+    </visual>
+  </link>
+  </xacro:macro>
+</robot>

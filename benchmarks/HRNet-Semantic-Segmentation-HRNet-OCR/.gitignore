@@ -1,0 +1,9 @@
+.vscode
+__pycache__/
+*.py[co]
+data/
+log/
+output/
+scripts/
+detail-api/
+data/list

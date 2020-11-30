@@ -183,7 +183,7 @@ The ROS workspace includes a plaftform description package which can provide rou
 ```
 
 ## Collaborator
-<a href="https://www.arl.army.mil/"><img src="images/arl_logo.png" alt="The DEVCOM Army Research Laboratory" style="width:180px;height:60px;"></a>
+<a href="https://www.arl.army.mil/"><img src="images/arl_logo.png" alt="The DEVCOM Army Research Laboratory" height="90px" width="270px"></a>
 
 ## License
 All datasets and code on this page are copyright by us and published under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License. 

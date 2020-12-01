@@ -64,7 +64,7 @@ export CUDA_VISIBLE_DEVICES="1"
 cd /path/to/code/benchmarks/SalsaNext/train/tasks/semantic  
 python infer2.py -d /path/to/RELLIS-3D -l /path/for/save/prediction -s test -m /path/to/pre-trained/model/folder
 ```
-Dowload pre-trained model ([Download xxGB]())
+Dowload pre-trained model ([Download 157MB](https://drive.google.com/file/d/1DxuzlnFKnU8EpSuODRywJUrJlieUUheg/view?usp=sharing))
 
 To retrain the GSCNN on RELLIS-3D:
 ```
@@ -88,7 +88,7 @@ chosen_log = '/path/to/pretrained/model/folder'
 config.sv_path = "/path/to/save/prediction"
 config.data_path = "/path/to/RELLIS-3D"
 ```
-Dowload pre-trained model ([xxGB]())
+Dowload pre-trained model ([Download 1GB](https://drive.google.com/file/d/1Exrt4yWDhgucx_vr08hAuXTcaLUcpXXm/view?usp=sharing))
 
 
 To retrain the KPConv on RELLIS-3D:

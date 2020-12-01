@@ -56,7 +56,7 @@ With the goal of providing multi-modal data to enhance autonomous off-road navig
 
 The header of the PLY file is described as followed:
 ```
-element verte
+element vertex
 property float x
 property float y
 property float z

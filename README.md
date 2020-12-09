@@ -40,7 +40,9 @@ With the goal of providing multi-modal data to enhance autonomous off-road navig
 
 **Full Images** ([Download 11GB](https://drive.google.com/file/d/1F3Leu0H_m6aPVpZITragfreO_SGtL2yV/view?usp=sharing))
 
-**Full Image Annotations** ([Download 94MB](https://drive.google.com/file/d/16URBUQn_VOGvUqfms-0I8HHKMtjPHsu5/view?usp=sharing))
+**Full Image Annotations Color Format** ([Download 119MB](https://drive.google.com/file/d/1HJl8Fi5nAjOr41DPUFmkeKWtDXhCZDke/view?usp=sharing))
+
+**Full Image Annotations ID Format** ([Download 94MB](https://drive.google.com/file/d/16URBUQn_VOGvUqfms-0I8HHKMtjPHsu5/view?usp=sharing))
 
 **Image Split File** ([44KB](https://drive.google.com/file/d/1zHmnVaItcYJAWat3Yti1W_5Nfux194WQ/view?usp=sharing))
 

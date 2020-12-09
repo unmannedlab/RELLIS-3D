@@ -66,7 +66,7 @@ python infer2.py -d /path/to/RELLIS-3D -l /path/for/save/prediction -s test -m /
 ```
 Dowload pre-trained model ([Download 157MB](https://drive.google.com/file/d/1DxuzlnFKnU8EpSuODRywJUrJlieUUheg/view?usp=sharing))
 
-To retrain the GSCNN on RELLIS-3D:
+To retrain the SalsaNext on RELLIS-3D:
 ```
 export CUDA_VISIBLE_DEVICES="0,1"
 cd /path/to/code/benchmarks/SalsaNext/train/tasks/semantic  

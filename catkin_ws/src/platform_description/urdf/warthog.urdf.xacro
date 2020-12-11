@@ -332,24 +332,24 @@
     <child link="os1_frame" />
     <origin xyz="0.45 0 -0.07" rpy="0 3.1415926 0" />
   </joint>
-  <link name="os1_sensor" />
+  <link name="ouster1/os1_sensor" />
   <joint name="os1_sensor_to_os1_frame" type="fixed">
     <parent link="os1_frame"/>
-    <child link="os1_sensor" />
+    <child link="ouster1/os1_sensor" />
     <origin xyz="0 0 0" rpy="0 0 -3.1415926" />
   </joint>
 
-  <link name="os1_lidar" />
+  <link name="ouster1/os1_lidar" />
   <joint name="os1_lidar_to_os1_sensor" type="fixed">
-    <parent link="os1_sensor"/>
-    <child link="os1_lidar" />
+    <parent link="ouster1/os1_sensor"/>
+    <child link="ouster1/os1_lidar" />
     <origin xyz="0 0 0.03618" rpy="0 0 -3.1415927" />
   </joint>
 
-  <link name="os1_imu" />
+  <link name="ouster1/os1_imu" />
   <joint name="os1_imu_to_os1_sensor" type="fixed">
-    <parent link="os1_sensor"/>
-    <child link="os1_imu" />
+    <parent link="ouster1/os1_sensor"/>
+    <child link="ouster1/os1_imu" />
     <origin xyz="0.006253 -0.011775 0.007645" rpy="0 0 0" />
   </joint>
   <!-- Bring in simulation data for Gazebo. -->

@@ -142,26 +142,29 @@ Topic Name | Message Tpye | Message Descriptison
 
 ### ROS Bag Download
 
-**ROS Bag Examples** ([2GB](https://drive.google.com/file/d/163pEtjMhcM1OJo36ZOi6_zDHpuPSL8us/view?usp=sharing))
+The following are the links for the ROS Bag files. 
+* Synced data (60 seconds example [2 GB](https://drive.google.com/file/d/13EHwiJtU0aAWBQn-ZJhTJwC1Yx2zDVUv/view?usp=sharing)): includes  synced */os1_cloud_node/points*, */pylon_camera_node/camera_info* and */pylon_camera_node/image_raw*
+* Full-stack Merged data:(60 seconds example [4.2 GB](https://drive.google.com/file/d/1qSeOoY6xbQGjcrZycgPM8Ty37eKDjpJL/view?usp=sharing)): includes all data in above table and extrinsic calibration info data embedded in the tf tree.
+* Full-stack Split Raw data:(60 seconds example [4.3 GB](https://drive.google.com/file/d/1-TDpelP4wKTWUDTIn0dNuZIT3JkBoZ_R/view?usp=sharing)): is orignal data recorded by ```rosbag record``` command. 
 
-**Sequence 00000**: Synced data: ([12GB](https://drive.google.com/file/d/10dHPMCschg1dMeb_Y6pcPvC-HZQZ8_ek/view?usp=sharing)) Filtered data: ([23GB](https://drive.google.com/file/d/1d-t4P1idWkfxDEkodBrsbd4B2nAc8rZ3/view?usp=sharing)) Full-stack Raw data: ([29GB](https://drive.google.com/drive/folders/1IZ-Tn_kzkp82mNbOL_4sNAniunD7tsYU?usp=sharing))
+**Sequence 00000**: Synced data: ([12GB](https://drive.google.com/file/d/10dHPMCschg1dMeb_Y6pcPvC-HZQZ8_ek/view?usp=sharing)) Full-stack Merged data: ([23GB](https://drive.google.com/file/d/1d-t4P1idWkfxDEkodBrsbd4B2nAc8rZ3/view?usp=sharing)) Full-stack Split Raw data: ([29GB](https://drive.google.com/drive/folders/1IZ-Tn_kzkp82mNbOL_4sNAniunD7tsYU?usp=sharing))
 
 [![Sequence 00000 Video](https://img.youtube.com/vi/Qc7IepWGKr8/0.jpg)](https://www.youtube.com/watch?v=Qc7IepWGKr8)
 
-**Sequence 00001**: Synced data: ([8GB](https://drive.google.com/file/d/1I98lEog0xFFAVVZ_AEBvXzIEcFQ2bGRl/view?usp=sharing)) Filtered data: ([16GB](https://drive.google.com/file/d/1LogHRN1ElE2xryILMPU3OtnV6VCnjs52/view?usp=sharing)) Full-stack Raw data: ([22GB](https://drive.google.com/drive/folders/1hf-vF5zyTKcCLqIiddIGdemzKT742T1t?usp=sharing))
+**Sequence 00001**: Synced data: ([8GB](https://drive.google.com/file/d/1I98lEog0xFFAVVZ_AEBvXzIEcFQ2bGRl/view?usp=sharing)) Full-stack Merged data: ([16GB](https://drive.google.com/file/d/1LogHRN1ElE2xryILMPU3OtnV6VCnjs52/view?usp=sharing)) Full-stack Split Raw data: ([22GB](https://drive.google.com/drive/folders/1hf-vF5zyTKcCLqIiddIGdemzKT742T1t?usp=sharing))
 
 [![Sequence 00001 Video](https://img.youtube.com/vi/nO5JADjDWQ0/0.jpg)](https://www.youtube.com/watch?v=nO5JADjDWQ0)
 
-**Sequence 00002**: Synced data: ([14GB](https://drive.google.com/file/d/1yhohyWOIIf00YLUZ1RT7ouq3B-iaOU91/view?usp=sharing)) Filtered data: ([28GB](https://drive.google.com/file/d/1F_8yviLHcAVmBpWEyCITFd1nRgPRmkVX/view?usp=sharing)) Full-stack Raw data: ([37GB](https://drive.google.com/drive/folders/1R8jP5Qo7Z6uKPoG9XUvFCStwJu6rtliu?usp=sharing))
+**Sequence 00002**: Synced data: ([14GB](https://drive.google.com/file/d/1yhohyWOIIf00YLUZ1RT7ouq3B-iaOU91/view?usp=sharing)) Full-stack Merged data: ([28GB](https://drive.google.com/file/d/1F_8yviLHcAVmBpWEyCITFd1nRgPRmkVX/view?usp=sharing)) Full-stack Split Raw data: ([37GB](https://drive.google.com/drive/folders/1R8jP5Qo7Z6uKPoG9XUvFCStwJu6rtliu?usp=sharing))
 
 [![Sequence 00002 Video](https://img.youtube.com/vi/aXaOmzjHmNE/0.jpg)](https://www.youtube.com/watch?v=aXaOmzjHmNE)
 
-**Sequence 00003**:Synced data: ([8GB](https://drive.google.com/file/d/1poY5eaKKhmjUQpF1rsoL4mm4wO7T8CJM/view?usp=sharing)) Filtered data: ([15GB](https://drive.google.com/file/d/1HDbtqaYhfeyLoq9UsxOhgCJl2urGVKUc/view?usp=sharing)) Full-stack Raw data: ([19GB](https://drive.google.com/drive/folders/1iP0k6dbmPdAH9kkxs6ugi6-JbrkGhm5o?usp=sharing))
+**Sequence 00003**:Synced data: ([8GB](https://drive.google.com/file/d/1poY5eaKKhmjUQpF1rsoL4mm4wO7T8CJM/view?usp=sharing)) Full-stack Merged data: ([15GB](https://drive.google.com/file/d/1HDbtqaYhfeyLoq9UsxOhgCJl2urGVKUc/view?usp=sharing)) Full-stack Split Raw data: ([19GB](https://drive.google.com/drive/folders/1iP0k6dbmPdAH9kkxs6ugi6-JbrkGhm5o?usp=sharing))
 
 
 [![Sequence 00003 Video](https://img.youtube.com/vi/Kjo3tGDSbtU/0.jpg)](https://www.youtube.com/watch?v=Kjo3tGDSbtU)
 
-**Sequence 00004**:Synced data: ([7GB](https://drive.google.com/file/d/1xLvai6rorpjxRZXraZK7qPsA1vYMkTHJ/view?usp=sharing)) Filtered data: ([14GB](https://drive.google.com/file/d/1usxAjxHrw89R6rMA0GtmYQRtzIP-QGJF/view?usp=sharing)) Full-stack Raw data: ([17GB](https://drive.google.com/drive/folders/1WV9pecF2beESyM7N29W-nhi-JaoKvEqc?usp=sharing))
+**Sequence 00004**:Synced data: ([7GB](https://drive.google.com/file/d/1xLvai6rorpjxRZXraZK7qPsA1vYMkTHJ/view?usp=sharing)) Full-stack Merged data: ([14GB](https://drive.google.com/file/d/1usxAjxHrw89R6rMA0GtmYQRtzIP-QGJF/view?usp=sharing)) Full-stack Split Raw data: ([17GB](https://drive.google.com/drive/folders/1WV9pecF2beESyM7N29W-nhi-JaoKvEqc?usp=sharing))
 
 
 [![Sequence 00004 Video](https://img.youtube.com/vi/lLLYTI4TCD4/0.jpg)](https://www.youtube.com/watch?v=lLLYTI4TCD4)

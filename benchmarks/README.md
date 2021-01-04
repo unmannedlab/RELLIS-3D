@@ -26,6 +26,7 @@ PY_CMD="python -m torch.distributed.launch --nproc_per_node=2"
 $PY_CMD tools/train.py --cfg experiments/rellis/seg_hrnet_ocr_w48_train_512x1024_sgd_lr1e-3_wd5e-4_bs_12_epoch484.yaml
 ```
 Add dataset path to ```ROOT``` in ```experiments/rellis/seg_hrnet_ocr_w48_train_512x1024_sgd_lr1e-3_wd5e-4_bs_12_epoch484.yaml```
+The models are initialized by the weights pretrained on the ImageNet. You can download the pretrained models from [https://github.com/HRNet/HRNet-Image-Classification](https://github.com/HRNet/HRNet-Image-Classification).
 
 ### GSCNN
 The GSCNN is a fork from [https://github.com/nv-tlabs/GSCNN](https://github.com/nv-tlabs/GSCNN)
@@ -49,7 +50,7 @@ export PYTHONPATH=/path/to/code/benchmarks/GSCNN-master/:$PYTHONPATH
 python train.py --dataset rellis --bs_mult 3 --lr 0.001 --exp final
 ```
 Add dataset path to ```__C.DATASET.RELLIS_DIR``` in ```benchmarks/GSCNN-master/config.py``` 
-
+The models are initialized by the weights pretrained on the ImageNet. You can download the pretrained models from [here](https://drive.google.com/file/d/1OfKQPQXbXGbWAQJj2R82x6qyz6f-1U6t/view).
 
 ## LiDAR Semantic Segmenation
 

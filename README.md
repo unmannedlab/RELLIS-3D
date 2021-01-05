@@ -24,6 +24,8 @@ Semantic scene understanding is crucial for robust and safe autonomous navigatio
 
 ![Sensor Setup Illustration](./images/sensor_setup.png)
 
+<span style="color:red; font-family:Georgia; text-align:center; font-size:2em;">Note: Due to .</span>
+
 ## Annotated Data:
 ### Ontology:
 With the goal of providing multi-modal data to enhance autonomous off-road navigation, we defined an ontology of object and terrain classes, which largely derives from [the RUGD dataset](http://rugd.vision/) but also includes unique terrain and object classes not present in RUGD. Specifically, sequences from this dataset includes classes such as mud, man-made barriers, and rubble piles. Additionally, this dataset provides a finer-grained class structure for water sources, i.e., puddle and deep water, as these two classes present different traversability scenarios for most robotic platforms. Overall, 20 classes (including void class) are present in the data.

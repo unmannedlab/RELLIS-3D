@@ -24,7 +24,6 @@ Semantic scene understanding is crucial for robust and safe autonomous navigatio
 
 ![Sensor Setup Illustration](./images/sensor_setup.png)
 
-<span style="color:red; font-family:Georgia; text-align:center; font-size:2em;">Note: Due to .</span>
 
 ## Annotated Data:
 ### Ontology:

@@ -1,5 +1,7 @@
 # RELLIS-3D Benchmarks
 
+The HRNet, SalsaNext and KPConv can use environment file ```requirement.txt```. GSCNN need use file ```gscnn_requirement.txt```.
+
 ## Image Semantic Segmenation 
 
 ### HRNet+OCR

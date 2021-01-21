@@ -25,6 +25,26 @@ Semantic scene understanding is crucial for robust and safe autonomous navigatio
 ![Sensor Setup Illustration](./images/sensor_setup.png)
 
 
+## Folder structure
+
+<pre>
+Rellis-3D
+├── pt_test.lst
+├── pt_val.lst
+├── pt_train.lst
+├── pt_test.lst
+├── pt_train.lst
+├── pt_val.lst
+├── 00000
+      ├── os1_cloud_node_kitti_bin/             -- directory containing ".bin" files with Velodyne point clouds.   
+      ├── os1_cloud_node_semantickitti_label_id/     -- label directory, will be generated if not present.  
+      ├── pylon_camera_node/    -- directory containing ".png" files from the color   camera.  
+      ├── pylon_camera_node_label_color -- color image lable
+      ├── pylon_camera_node_label_id -- id image lable
+      ├── calib.txt             -- calibration of velodyne vs. camera. needed for projection of point cloud into camera.  
+      └── poses.txt             -- file containing the poses of every scan.
+</pre>
+
 ## Annotated Data:
 ### Ontology:
 With the goal of providing multi-modal data to enhance autonomous off-road navigation, we defined an ontology of object and terrain classes, which largely derives from [the RUGD dataset](http://rugd.vision/) but also includes unique terrain and object classes not present in RUGD. Specifically, sequences from this dataset includes classes such as mud, man-made barriers, and rubble piles. Additionally, this dataset provides a finer-grained class structure for water sources, i.e., puddle and deep water, as these two classes present different traversability scenarios for most robotic platforms. Overall, 20 classes (including void class) are present in the data.
@@ -176,7 +196,10 @@ The following are the links for the ROS Bag files.
 ### ROS Environment Installment
 The ROS workspace includes a plaftform description package which can provide rough tf tree for running the rosbag.
 
+To run cartographer on RELLIS-3D please refer to [here](https://github.com/unmannedlab/cartographer)
+
 ![Warthog in RVIZ](images/platform_ros.png)
+
 
 ## Full Data Download:
 [Access Link](https://drive.google.com/drive/folders/1aZ1tJ3YYcWuL3oWKnrTIC5gq46zx1bMc?usp=sharing)

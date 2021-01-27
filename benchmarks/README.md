@@ -4,6 +4,9 @@ The HRNet, SalsaNext and KPConv can use environment file ```requirement.txt```. 
 
 ## Image Semantic Segmenation 
 
+**Note: if you used our script the evalutate the image segmentation model, the id of save predition is from 0 to num_classes. You may need to convert the id back or convert the ground truth using [function](https://github.com/unmannedlab/RELLIS-3D/blob/794089082b7803443266a65336e959a65ee0fd98/benchmarks/HRNet-Semantic-Segmentation-HRNet-OCR/lib/datasets/rellis.py#L104) to convert the label into the original id based on this [mapping](https://github.com/unmannedlab/RELLIS-3D/blob/794089082b7803443266a65336e959a65ee0fd98/benchmarks/HRNet-Semantic-Segmentation-HRNet-OCR/lib/datasets/rellis.py#L51).**
+
+
 ### HRNet+OCR
 The HRNext+OCR is a fork from [https://github.com/HRNet/HRNet-Semantic-Segmentation/tree/HRNet-OCR](https://github.com/HRNet/HRNet-Semantic-Segmentation/tree/HRNet-OCR)
 

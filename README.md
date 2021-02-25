@@ -166,6 +166,7 @@ Topic Name | Message Tpye | Message Descriptison
 
 ### ROS Bag Download
 
+** On 02/25/2021, we updated the lidar to camera calibration parameter (https://github.com/unmannedlab/RELLIS-3D/commit/3da6c2a4c78b0b70068e73d596c4dc956be17f06). The tf in rosbags have been updated. We are working on it. **
 
 The following are the links for the ROS Bag files. 
 * Synced data (60 seconds example [2 GB](https://drive.google.com/file/d/13EHwiJtU0aAWBQn-ZJhTJwC1Yx2zDVUv/view?usp=sharing)): includes  synced */os1_cloud_node/points*, */pylon_camera_node/camera_info* and */pylon_camera_node/image_raw*

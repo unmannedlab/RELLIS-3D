@@ -178,8 +178,6 @@ Topic Name | Message Tpye | Message Descriptison
 /warthog_velocity_controller/odom | nav_msgs/Odometry |
 ### ROS Bag Download
 
-**On 02/25/2021 (commit [7c156e1](https://github.com/unmannedlab/RELLIS-3D/commit/3da6c2a4c78b0b70068e73d596c4dc956be17f06)), we updated the lidar to camera calibration parameter. The tf in rosbags haven't been updated. We are working on it.**
-
 The following are the links for the ROS Bag files. 
 * Synced data (60 seconds example [2 GB](https://drive.google.com/file/d/13EHwiJtU0aAWBQn-ZJhTJwC1Yx2zDVUv/view?usp=sharing)): includes  synced */os1_cloud_node/points*, */pylon_camera_node/camera_info* and */pylon_camera_node/image_raw*
 * Full-stack Merged data:(60 seconds example [4.2 GB](https://drive.google.com/file/d/1qSeOoY6xbQGjcrZycgPM8Ty37eKDjpJL/view?usp=sharing)): includes all data in above table and extrinsic calibration info data embedded in the tf tree.

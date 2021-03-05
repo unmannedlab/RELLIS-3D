@@ -149,13 +149,24 @@ Topic Name | Message Tpye | Message Descriptison
 /imu/data | sensor_msgs/Imu | Filtered imu data from embeded imu of Warthog
 /imu/data_raw | sensor_msgs/Imu |  Raw imu data from embeded imu of Warthog
 /imu/mag | sensor_msgs/MagneticField | Raw magnetic field data from embeded imu of Warthog
-/nerian_stereo/left_image | sensor_msgs/Image | Left image from Nerian Karmin2 
-/nerian_stereo/right_image | sensor_msgs/Image | Right image from Nerian Karmin2 
+/left_drive/status/battery_current | std_msgs/Float64 | 
+/left_drive/status/battery_voltage | std_msgs/Float64 |
+/mcu/status | warthog_msgs/Status |
+/nerian/left/camera_info | sensor_msgs/CameraInfo | 
+/nerian/left/image_raw | sensor_msgs/Image | Left image from Nerian Karmin2 
+/nerian/right/camera_info | sensor_msgs/CameraInfo | 
+/nerian/right/image_raw  | sensor_msgs/Image | Right image from Nerian Karmin2 
 /odometry/filtered | nav_msgs/Odometry | A filtered local-ization estimate based on wheel odometry (en-coders) and integrated IMU from Warthog
 /os1_cloud_node/imu | sensor_msgs/Imu | Raw imu data from embeded imu of Ouster Lidar
 /os1_cloud_node/points | sensor_msgs/PointCloud2 | Point cloud data from Ouster Lidar
 /os1_node/imu_packets | ouster_ros/PacketMsg | Raw imu data from Ouster Lidar
 /os1_node/lidar_packets | ouster_ros/PacketMsg | Raw lidar data from Ouster Lidar
+/pylon_camera_node/camera_info | sensor_msgs/CameraInfo | 
+/pylon_camera_node/image_raw | sensor_msgs/Image |
+/right_drive/status/battery_current | std_msgs/Float64 | 
+/right_drive/status/battery_voltage | std_msgs/Float64 |
+/tf | tf2_msgs/TFMessage |
+/tf_static  | tf2_msgs/TFMessage
 /vectornav/GPS | sensor_msgs/NavSatFix | INS data from VectorNav-VN300
 /vectornav/IMU | sensor_msgs/Imu | Imu data from VectorNav-VN300
 /vectornav/Mag | sensor_msgs/MagneticField | Raw magnetic field data from VectorNav-VN300
@@ -163,7 +174,8 @@ Topic Name | Message Tpye | Message Descriptison
 /vectornav/Pres | sensor_msgs/FluidPressure |
 /vectornav/Temp | sensor_msgs/Temperature |
 /velodyne_points | sensor_msgs/PointCloud2 | PointCloud produced by the Velodyne Lidar
-
+/warthog_velocity_controller/cmd_vel | geometry_msgs/Twist |
+/warthog_velocity_controller/odom | nav_msgs/Odometry |
 ### ROS Bag Download
 
 **On 02/25/2021 (commit [7c156e1](https://github.com/unmannedlab/RELLIS-3D/commit/3da6c2a4c78b0b70068e73d596c4dc956be17f06)), we updated the lidar to camera calibration parameter. The tf in rosbags haven't been updated. We are working on it.**
@@ -173,24 +185,24 @@ The following are the links for the ROS Bag files.
 * Full-stack Merged data:(60 seconds example [4.2 GB](https://drive.google.com/file/d/1qSeOoY6xbQGjcrZycgPM8Ty37eKDjpJL/view?usp=sharing)): includes all data in above table and extrinsic calibration info data embedded in the tf tree.
 * Full-stack Split Raw data:(60 seconds example [4.3 GB](https://drive.google.com/file/d/1-TDpelP4wKTWUDTIn0dNuZIT3JkBoZ_R/view?usp=sharing)): is orignal data recorded by ```rosbag record``` command. 
 
-**Sequence 00000**: Synced data: ([12GB](https://drive.google.com/file/d/10dHPMCschg1dMeb_Y6pcPvC-HZQZ8_ek/view?usp=sharing)) Full-stack Merged data: ([23GB](https://drive.google.com/file/d/1d-t4P1idWkfxDEkodBrsbd4B2nAc8rZ3/view?usp=sharing)) Full-stack Split Raw data: ([29GB](https://drive.google.com/drive/folders/1IZ-Tn_kzkp82mNbOL_4sNAniunD7tsYU?usp=sharing))
+**Sequence 00000**: Synced data: ([12GB](https://drive.google.com/file/d/1bIb-6fWbaiI9Q8Pq9paANQwXWn7GJDtl/view?usp=sharing)) Full-stack Merged data: ([23GB](https://drive.google.com/file/d/1grcYRvtAijiA0Kzu-AV_9K4k2C1Kc3Tn/view?usp=sharing)) Full-stack Split Raw data: ([29GB](https://drive.google.com/drive/folders/1IZ-Tn_kzkp82mNbOL_4sNAniunD7tsYU?usp=sharing))
 
 [![Sequence 00000 Video](https://img.youtube.com/vi/Qc7IepWGKr8/0.jpg)](https://www.youtube.com/watch?v=Qc7IepWGKr8)
 
-**Sequence 00001**: Synced data: ([8GB](https://drive.google.com/file/d/1I98lEog0xFFAVVZ_AEBvXzIEcFQ2bGRl/view?usp=sharing)) Full-stack Merged data: ([16GB](https://drive.google.com/file/d/1LogHRN1ElE2xryILMPU3OtnV6VCnjs52/view?usp=sharing)) Full-stack Split Raw data: ([22GB](https://drive.google.com/drive/folders/1hf-vF5zyTKcCLqIiddIGdemzKT742T1t?usp=sharing))
+**Sequence 00001**: Synced data: ([8GB](https://drive.google.com/file/d/1xNjAFE3cv6X8n046irm8Bo5QMerNbwP1/view?usp=sharing)) Full-stack Merged data: ([16GB](https://drive.google.com/file/d/1geoU45pPavnabQ0arm4ILeHSsG3cU6ti/view?usp=sharing)) Full-stack Split Raw data: ([22GB](https://drive.google.com/drive/folders/1hf-vF5zyTKcCLqIiddIGdemzKT742T1t?usp=sharing))
 
 [![Sequence 00001 Video](https://img.youtube.com/vi/nO5JADjDWQ0/0.jpg)](https://www.youtube.com/watch?v=nO5JADjDWQ0)
 
-**Sequence 00002**: Synced data: ([14GB](https://drive.google.com/file/d/1yhohyWOIIf00YLUZ1RT7ouq3B-iaOU91/view?usp=sharing)) Full-stack Merged data: ([28GB](https://drive.google.com/file/d/1F_8yviLHcAVmBpWEyCITFd1nRgPRmkVX/view?usp=sharing)) Full-stack Split Raw data: ([37GB](https://drive.google.com/drive/folders/1R8jP5Qo7Z6uKPoG9XUvFCStwJu6rtliu?usp=sharing))
+**Sequence 00002**: Synced data: ([14GB](https://drive.google.com/file/d/1gy0ehP9Buj-VkpfvU9Qwyz1euqXXQ_mj/view?usp=sharing)) Full-stack Merged data: ([28GB](https://drive.google.com/file/d/1h0CVg62jTXiJ91LnR6md-WrUBDxT543n/view?usp=sharing)) Full-stack Split Raw data: ([37GB](https://drive.google.com/drive/folders/1R8jP5Qo7Z6uKPoG9XUvFCStwJu6rtliu?usp=sharing))
 
 [![Sequence 00002 Video](https://img.youtube.com/vi/aXaOmzjHmNE/0.jpg)](https://www.youtube.com/watch?v=aXaOmzjHmNE)
 
-**Sequence 00003**:Synced data: ([8GB](https://drive.google.com/file/d/1poY5eaKKhmjUQpF1rsoL4mm4wO7T8CJM/view?usp=sharing)) Full-stack Merged data: ([15GB](https://drive.google.com/file/d/1HDbtqaYhfeyLoq9UsxOhgCJl2urGVKUc/view?usp=sharing)) Full-stack Split Raw data: ([19GB](https://drive.google.com/drive/folders/1iP0k6dbmPdAH9kkxs6ugi6-JbrkGhm5o?usp=sharing))
+**Sequence 00003**:Synced data: ([8GB](https://drive.google.com/file/d/1vCeZusijzyn1ZrZbg4JaHKYSc2th7GEt/view?usp=sharing)) Full-stack Merged data: ([15GB](https://drive.google.com/file/d/1glJzgnTYLIB_ar3CgHpc_MBp5AafQpy9/view?usp=sharing)) Full-stack Split Raw data: ([19GB](https://drive.google.com/drive/folders/1iP0k6dbmPdAH9kkxs6ugi6-JbrkGhm5o?usp=sharing))
 
 
 [![Sequence 00003 Video](https://img.youtube.com/vi/Kjo3tGDSbtU/0.jpg)](https://www.youtube.com/watch?v=Kjo3tGDSbtU)
 
-**Sequence 00004**:Synced data: ([7GB](https://drive.google.com/file/d/1xLvai6rorpjxRZXraZK7qPsA1vYMkTHJ/view?usp=sharing)) Full-stack Merged data: ([14GB](https://drive.google.com/file/d/1usxAjxHrw89R6rMA0GtmYQRtzIP-QGJF/view?usp=sharing)) Full-stack Split Raw data: ([17GB](https://drive.google.com/drive/folders/1WV9pecF2beESyM7N29W-nhi-JaoKvEqc?usp=sharing))
+**Sequence 00004**:Synced data: ([7GB](https://drive.google.com/file/d/1gxODhAd8CBM5AGvsoyuqN7yGpWazzmVy/view?usp=sharing)) Full-stack Merged data: ([14GB](https://drive.google.com/file/d/1AuEjX0do3jGZhGKPszSEUNoj85YswNya/view?usp=sharing)) Full-stack Split Raw data: ([17GB](https://drive.google.com/drive/folders/1WV9pecF2beESyM7N29W-nhi-JaoKvEqc?usp=sharing))
 
 
 [![Sequence 00004 Video](https://img.youtube.com/vi/lLLYTI4TCD4/0.jpg)](https://www.youtube.com/watch?v=lLLYTI4TCD4)
@@ -227,6 +239,7 @@ All datasets and code on this page are copyright by us and published under the C
 ## Updates
 * 11/26/2020 v1.0 release
 * 02/25/2021 improve camera and lidar calibration parameter
+* 03/04/2021 update ROS bag with new tf (v1.1 release)
 
 ## Related Work
 

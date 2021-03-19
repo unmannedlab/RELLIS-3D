@@ -21,6 +21,8 @@ python tools/test.py --cfg experiments/rellis/seg_hrnet_ocr_w48_train_512x1024_s
 ```
 Add dataset path to ```ROOT``` in ```experiments/rellis/seg_hrnet_ocr_w48_train_512x1024_sgd_lr1e-3_wd5e-4_bs_12_epoch484.yaml``` 
 
+The models are initialized by the weights pretrained on the ImageNet. You can download the pretrained models from [onedrive](https://onedrive.live.com/?authkey=%21AKvqI6pBZlifgJk&cid=F7FD0B7F26543CEB&id=F7FD0B7F26543CEB%21116&parId=F7FD0B7F26543CEB%21105&action=locate) or [https://github.com/HRNet/HRNet-Image-Classification](https://github.com/HRNet/HRNet-Image-Classification).
+
 Dowload pre-trained model ([Download 751MB](https://drive.google.com/file/d/137Lfw6HcDmdEReu_R7Q_I-zmRvvqFys3/view?usp=sharing))
 
 To retrain the HRNet on RELLIS-3D:
@@ -31,7 +33,7 @@ PY_CMD="python -m torch.distributed.launch --nproc_per_node=2"
 $PY_CMD tools/train.py --cfg experiments/rellis/seg_hrnet_ocr_w48_train_512x1024_sgd_lr1e-3_wd5e-4_bs_12_epoch484.yaml
 ```
 Add dataset path to ```ROOT``` in ```experiments/rellis/seg_hrnet_ocr_w48_train_512x1024_sgd_lr1e-3_wd5e-4_bs_12_epoch484.yaml```
-The models are initialized by the weights pretrained on the ImageNet. You can download the pretrained models from [https://github.com/HRNet/HRNet-Image-Classification](https://github.com/HRNet/HRNet-Image-Classification).
+
 
 ### GSCNN
 The GSCNN is a fork from [https://github.com/nv-tlabs/GSCNN](https://github.com/nv-tlabs/GSCNN)

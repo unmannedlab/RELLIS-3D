@@ -61,7 +61,6 @@ def save_output(label_dir, output_dir, config_path):
 
     for label_path in tqdm(label_list):
         label = np.array(Image.open(os.path.join(label_dir, label_path)))
-        print(label.shape)
         label = label[:, :,0]
         label = convert_label(label, learning_map, True)
         color_label = convert_color(label, color_map)

@@ -55,6 +55,9 @@ With the goal of providing multi-modal data to enhance autonomous off-road navig
 
 ![Images Statics](./images/img_dist.png)
 
+<span style="color:red"> Note: Due to the limitation of Google Drive, the downloads might be constrained. Please wait for 24h and try again. If you still can't access the file, please email maskjp@tamu.edu with the title "RELLIS-3D Access Request".</span>.
+
+
 ### Image Download: 
 
 **Image with Annotation Examples** ([Download 3MB](https://drive.google.com/file/d/1wIig-LCie571DnK72p2zNAYYWeclEz1D/view?usp=sharing))

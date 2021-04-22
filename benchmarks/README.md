@@ -3,8 +3,9 @@
 The HRNet, SalsaNext and KPConv can use environment file ```requirement.txt```. GSCNN need use file ```gscnn_requirement.txt```.
 
 ## Image Semantic Segmenation 
+**Note: New script for evaluate the results is available for [point cloud](https://github.com/unmannedlab/RELLIS-3D/blob/main/utils/Evaluate_pt.ipynb) and [image](https://github.com/unmannedlab/RELLIS-3D/blob/main/utils/Evaluate_img.ipynb)**
 
-**Note: if you used our script the evalutate the image segmentation model, the id of save predition is from 0 to num_classes. You may need to convert the id back or convert the ground truth using this [script](https://github.com/unmannedlab/RELLIS-3D/blob/main/utils/label_convert.py).**
+**Note: if you used your script the evalutate the image segmentation model, the id of save predition is from 0 to num_classes. You may need to convert the id back or convert the ground truth using this [script](https://github.com/unmannedlab/RELLIS-3D/blob/main/utils/label_convert.py).**
 
 
 ### HRNet+OCR

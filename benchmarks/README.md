@@ -24,6 +24,7 @@ Add dataset path to ```ROOT``` in ```experiments/rellis/seg_hrnet_ocr_w48_train_
 
 The models are initialized by the weights pretrained on the ImageNet. You can download the pretrained models from [onedrive](https://onedrive.live.com/?authkey=%21AKvqI6pBZlifgJk&cid=F7FD0B7F26543CEB&id=F7FD0B7F26543CEB%21116&parId=F7FD0B7F26543CEB%21105&action=locate) or [https://github.com/HRNet/HRNet-Image-Classification](https://github.com/HRNet/HRNet-Image-Classification).
 
+**Note: the pre-trained model was updated on June 8th 2021**
 Dowload pre-trained model ([Download 751MB](https://drive.google.com/file/d/137Lfw6HcDmdEReu_R7Q_I-zmRvvqFys3/view?usp=sharing))
 
 To retrain the HRNet on RELLIS-3D:

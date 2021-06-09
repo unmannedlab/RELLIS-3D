@@ -16,6 +16,7 @@ import sys
 import torch
 import numpy as np
 
+import yaml
 from utils.misc import AverageMeter, prep_experiment, evaluate_eval, fast_hist
 from utils.f_boundary import eval_mask_boundary
 import datasets
@@ -108,9 +109,55 @@ parser.add_argument('--test_sv_path', type=str, default="")
 parser.add_argument('--checkpoint_path',type=str,default="")
 parser.add_argument('-wb', '--wt_bound', type=float, default=1.0)
 parser.add_argument('--maxSkip', type=int, default=0)
+parser.add_argument('--data-cfg', help='data config (kitti format)',
+                    default='config/rellis.yaml',
+                    type=str)
+parser.add_argument('--viz', dest='viz',
+                    help="Save color predictions to disk",
+                    action='store_true')
 args = parser.parse_args()
 args.best_record = {'epoch': -1, 'iter': 0, 'val_loss': 1e10, 'acc': 0,
                         'acc_cls': 0, 'mean_iu': 0, 'fwavacc': 0}
+
+
+def convert_label(label, inverse=False):
+    label_mapping = {0: 0,
+                     1: 0,
+                     3: 1,
+                     4: 2,
+                     5: 3,
+                     6: 4,
+                     7: 5,
+                     8: 6,
+                     9: 7,
+                     10: 8,
+                     12: 9,
+                     15: 10,
+                     17: 11,
+                     18: 12,
+                     19: 13,
+                     23: 14,
+                     27: 15,
+                    #  29: 1,
+                    #  30: 1,
+                     31: 16,
+                    #  32: 4,
+                     33: 17,
+                     34: 18}
+    temp = label.copy()
+    if inverse:
+        for v,k in label_mapping.items():
+            temp[label == k] = v
+    else:
+        for k, v in label_mapping.items():
+            temp[label == k] = v
+    return temp
+
+def convert_color(label, color_map):
+        temp = np.zeros(label.shape + (3,)).astype(np.uint8)
+        for k,v in color_map.items():
+            temp[label == k] = v
+        return temp
 
 #Enable CUDNN Benchmarking optimization
 torch.backends.cudnn.benchmark = True
@@ -143,6 +190,16 @@ def main():
         test_sv_path = args.test_sv_path
         print(f"Saving prediction {test_sv_path}")
         net.eval()
+
+
+        try:
+            print("Opening config file %s" % args.data_cfg)
+            CFG = yaml.safe_load(open(args.data_cfg, 'r'))
+        except Exception as e:
+            print(e)
+            print("Error opening yaml file.")
+            quit()
+        id_color_map = CFG["color_map"]
         for vi, data in enumerate(tqdm(val_loader)):
             input, mask, img_name, img_path = data
             assert len(input.size()) == 4 and len(mask.size()) == 3
@@ -161,24 +218,37 @@ def main():
                 _,file_name = os.path.split(img_path[i])
                 file_name = file_name.replace("jpg","png")
                 seq = img_path[i][:5]
-                seg_path = os.path.join(test_sv_path,"gscnn","seg",seq)
+                seg_path = os.path.join(test_sv_path,"gscnn","labels",seq)
                 if not os.path.exists(seg_path):
                     os.makedirs(seg_path)
-                edge_path = os.path.join(test_sv_path,"gscnn","edge",seq)
-                edgenp_path = os.path.join(test_sv_path,"gscnn","edgenp",seq)
-                if not os.path.exists(edge_path):
-                    os.makedirs(edge_path)
-                    os.makedirs(edgenp_path)
+
                 seg_arg = np.argmax(seg_predictions[i],axis=0).astype(np.uint8)
-                edge_arg = np.argmax(edge_predictions[i],axis=0).astype(np.uint8)
+                seg_arg = convert_label(seg_arg,True)
 
                 seg_img = np.stack((seg_arg,seg_arg,seg_arg),axis=2)
-                edge_img = np.stack((edge_arg,edge_arg,edge_arg),axis=2)
                 seg_img = Image.fromarray(seg_img)
                 seg_img.save(os.path.join(seg_path,file_name))
-                edge_img = Image.fromarray(edge_img)
-                edge_img.save(os.path.join(edge_path,file_name))
-                np.save(os.path.join(edge_path,file_name.replace("png","npy")),edge_predictions[i])
+
+                if args.viz:
+                    edge_arg = np.argmax(edge_predictions[i],axis=0).astype(np.uint8)
+                    edge_img = np.stack((edge_arg,edge_arg,edge_arg),axis=2)
+
+                    edge_path = os.path.join(test_sv_path,"gscnn","edge",seq)
+                    #edgenp_path = os.path.join(test_sv_path,"gscnn","edgenp",seq)
+                    if not os.path.exists(edge_path):
+                        os.makedirs(edge_path)
+                        #os.makedirs(edgenp_path)
+                    edge_img = Image.fromarray(edge_img)
+                    edge_img.save(os.path.join(edge_path,file_name))                           
+
+                    color_label = convert_color(seg_arg,id_color_map)
+                    color_path = os.path.join(test_sv_path,"gscnn","color",seq)
+                    if not os.path.exists(color_path):
+                        os.makedirs(color_path)
+                    color_label = convert_color(seg_arg,id_color_map)
+                    color_label = Image.fromarray(color_label)
+                    color_label.save(os.path.join(color_path,file_name))                    
+
 
         return
 

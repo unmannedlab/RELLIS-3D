@@ -33,7 +33,7 @@ class GatedSpatialConv2d(_ConvNd):
         dilation = _pair(dilation)
         super(GatedSpatialConv2d, self).__init__(
             in_channels, out_channels, kernel_size, stride, padding, dilation,
-            False, _pair(0), groups, bias)
+            False, _pair(0), groups, bias, 'zeros')
 
         self._gate_conv = nn.Sequential(
             mynn.Norm2d(in_channels+1),

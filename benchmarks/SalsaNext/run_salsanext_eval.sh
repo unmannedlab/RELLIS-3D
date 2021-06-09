@@ -1,4 +1,4 @@
 #!/bin/sh
 export CUDA_VISIBLE_DEVICES="1"
 cd ./train/tasks/semantic
-python infer2.py -d /home/usl/Datasets/rellis -l /home/usl/Datasets -s test -m /home/usl/Code/Peng/data_collection/benchmarks/SalsaNext/train/tasks/semantic/logs/logs/2020-10-14-17_37rellis
+python infer2.py -d /path/to/Datasets/rellis -l /path/to/save -s test -m /path/to/salsanext_best/2020-10-14-17:37rellis

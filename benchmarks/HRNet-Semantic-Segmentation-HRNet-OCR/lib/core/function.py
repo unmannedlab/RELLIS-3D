@@ -24,6 +24,46 @@ import utils.distributed as dist
 from PIL import Image
 
 
+def convert_label(label, inverse=False):
+    label_mapping = {0: 0,
+                     1: 0,
+                     3: 1,
+                     4: 2,
+                     5: 3,
+                     6: 4,
+                     7: 5,
+                     8: 6,
+                     9: 7,
+                     10: 8,
+                     12: 9,
+                     15: 10,
+                     17: 11,
+                     18: 12,
+                     19: 13,
+                     23: 14,
+                     27: 15,
+                    #  29: 1,
+                    #  30: 1,
+                     31: 16,
+                    #  32: 4,
+                     33: 17,
+                     34: 18}
+    temp = label.copy()
+    if inverse:
+        for v,k in label_mapping.items():
+            temp[label == k] = v
+    else:
+        for k, v in label_mapping.items():
+            temp[label == k] = v
+    return temp
+
+def convert_color(label, color_map):
+        temp = np.zeros(label.shape + (3,)).astype(np.uint8)
+        for k,v in color_map.items():
+            temp[label == k] = v
+        return temp
+    
+
 def reduce_tensor(inp):
     """
     Reduce the loss from all processes so that 
@@ -153,7 +193,7 @@ def validate(config, testloader, model, writer_dict):
 
 
 def testval(config, test_dataset, testloader, model,
-            sv_dir='', sv_pred=False):
+            sv_dir='', sv_pred=False, viz=True, id_color_map={}):
     model.eval()
     confusion_matrix = np.zeros(
         (config.DATASET.NUM_CLASSES, config.DATASET.NUM_CLASSES))
@@ -167,7 +207,7 @@ def testval(config, test_dataset, testloader, model,
                 image,
                 scales=config.TEST.SCALE_LIST,
                 flip=config.TEST.FLIP_TEST)
-
+            pred = convert_label(pred, True)
             if len(border_padding) > 0:
                 border_padding = border_padding[0]
                 pred = pred[:, :, 0:pred.size(2) - border_padding[0], 0:pred.size(3) - border_padding[1]]
@@ -212,7 +252,7 @@ def testval(config, test_dataset, testloader, model,
 
 
 def test(config, test_dataset, testloader, model,
-         sv_dir='', sv_pred=True):
+         sv_dir='', sv_pred=True, viz=True, id_color_map={}):
     model.eval()
     with torch.no_grad():
         for _, batch in enumerate(tqdm(testloader)):
@@ -221,7 +261,6 @@ def test(config, test_dataset, testloader, model,
             pred = model(image)
             pred = pred[config.TEST.OUTPUT_INDEX]
             pred_np = pred.cpu().numpy()
-
             b,_,_,_ = pred.shape
             for i in range(b):
                 sv_path = os.path.join(config.OUTPUT_DIR, 'hrnet',name[i][:5],'pylon_camera_node_label_id')
@@ -231,9 +270,27 @@ def test(config, test_dataset, testloader, model,
                 file_name = file_name.replace("jpg","png")
                 data_path = os.path.join(sv_path,file_name)
                 pred_arg = np.argmax(pred_np[i],axis=0).astype(np.uint8)
+                pred_arg = convert_label(pred_arg, True)
                 pred_img = np.stack((pred_arg,pred_arg,pred_arg),axis=2)
                 pred_img = Image.fromarray(pred_img)
                 pred_img.save(data_path)
+                if viz:
+                    sv_path = os.path.join(config.OUTPUT_DIR, 'hrnet',name[i][:5],'pylon_camera_node_label_color')
+                    if not os.path.exists(sv_path):
+                        os.makedirs(sv_path)
+                    _, file_name = os.path.split(name[i])
+                    file_name = file_name.replace("jpg","png")
+                    color_path = os.path.join(sv_path,file_name)
+                    color_label = convert_color(pred_arg, id_color_map)
+                    # pred_arg_flat = np.ravel(pred_arg)
+                    # print(pred_arg)
+                    # color_arg = np.array([id_color_map.get(i,(i,i,i)) for i in pred_arg_flat]).astype(np.uint8)
+                    # pred_arg_back = np.reshape(color_arg, (pred_arg.shape[0],pred_arg.shape[1],-1))
+                    # print(pred_arg_back)
+                    # print(pred_arg_back[:,:,0])
+                    # color_img = Image.fromarray(np.reshape(color_arg,(pred_arg.shape[0],pred_arg.shape[1],-1)))
+                    color_img = Image.fromarray(color_label,'RGB')
+                    color_img.save(color_path)
                 #np.save(data_path,pred_arg)
             # pred = test_dataset.multi_scale_inference(
             #     config,

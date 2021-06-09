@@ -13,6 +13,7 @@ import sys
 import logging
 import time
 import timeit
+import yaml
 from pathlib import Path
 
 import numpy as np
@@ -37,11 +38,16 @@ def parse_args():
                         help='experiment configure file name',
                         required=True,
                         type=str)
+    parser.add_argument('--save', dest='save',
+                        help="Save predictions to disk",
+                        action='store_true')
+    parser.add_argument('--data-cfg', help='data config (kitti format)',
+                        default='config/rellis.yaml',
+                        type=str)
     parser.add_argument('opts',
                         help="Modify config options using the command-line",
                         default=None,
                         nargs=argparse.REMAINDER)
-
     args = parser.parse_args()
     update_config(config, args)
 
@@ -92,6 +98,7 @@ def main():
     model.load_state_dict(model_dict)
 
     gpus = list(config.GPUS)
+    print('GPUS:',gpus)
     model = nn.DataParallel(model, device_ids=gpus).cuda()
 
     # prepare data
@@ -115,12 +122,24 @@ def main():
         num_workers=config.WORKERS,
         pin_memory=True)
     
+    try:
+        print("Opening config file %s" % args.data_cfg)
+        CFG = yaml.safe_load(open(args.data_cfg, 'r'))
+    except Exception as e:
+        print(e)
+        print("Error opening yaml file.")
+        quit()
+
+    id_color_map = CFG["color_map"]
     start = timeit.default_timer()
     if 'val' in config.DATASET.TEST_SET:
         mean_IoU, IoU_array, pixel_acc, mean_acc = testval(config, 
                                                            test_dataset, 
                                                            testloader, 
-                                                           model)
+                                                           model,
+                                                           sv_dir='test_output',
+                                                           sv_pred=args.save,
+                                                           id_color_map = id_color_map)
     
         msg = 'MeanIU: {: 4.4f}, Pixel_Acc: {: 4.4f}, \
             Mean_Acc: {: 4.4f}, Class IoU: '.format(mean_IoU, 
@@ -132,7 +151,9 @@ def main():
              test_dataset, 
              testloader, 
              model,
-             sv_dir=final_output_dir)
+             sv_dir=final_output_dir,
+             sv_pred=args.save,
+             id_color_map = id_color_map)
 
     end = timeit.default_timer()
     logger.info('Mins: %d' % np.int((end-start)/60))

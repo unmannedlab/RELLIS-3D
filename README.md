@@ -7,6 +7,12 @@ Peng Jiang<sup>1</sup>, Philip Osteen<sup>2</sup>, Maggie Wigness<sup>2</sup> an
 <a href="https://unmannedlab.github.io/research/RELLIS-3D">[Website]</a> <a href="https://arxiv.org/abs/2011.12954">[Paper]</a> <a href="https://github.com/unmannedlab/RELLIS-3D">[Github]</a> 
 </p>
 
+## Updates
+* 11/26/2020 v1.0 release
+* 02/25/2021 improve camera and lidar calibration parameter
+* 03/04/2021 update ROS bag with new tf (v1.1 release)
+* 06/14/2021 fix missing labels of point cloud and fix wrong poses
+
 ## Overview
 Semantic scene understanding is crucial for robust and safe autonomous navigation, particularly so in off-road environments. Recent deep learning advances for 3D semantic segmentation rely heavily on large sets of training data; however, existing autonomy datasets represent urban environments or lack multimodal off-road data. We fill this gap with RELLIS-3D, a multimodal dataset collected in an off-road environment containing annotations for **13,556 LiDAR scans** and **6,235 images**. The data was collected on the Rellis Campus of Texas A\&M University and presents challenges to existing algorithms related to class imbalance and environmental topography. Additionally, we evaluate the current state of the art deep learning semantic segmentation models on this dataset. Experimental results show that RELLIS-3D presents challenges for algorithms designed for segmentation in urban environments. Except for the annotated data, the dataset also provides full-stack sensor data in ROS bag format, including **RGB camera images**, **LiDAR point clouds**, **a pair of stereo images**, **high-precision GPS measurement**, and **IMU data**. This novel dataset provides the resources needed by researchers to develop more advanced algorithms and investigate new research directions to enhance autonomous navigation in off-road environments.
 
@@ -104,9 +110,9 @@ To visualize the color of the ply file, please use [CloudCompare](https://www.da
 
 To visualize the datasets using the SemanticKITTI tools, please use this fork: [https://github.com/unmannedlab/point_labeler](https://github.com/unmannedlab/point_labeler)
 
-**LiDAR Annotation SemanticKITTI Format** ([Download 174MB](https://drive.google.com/file/d/1LUmmO2imJ4m5uCtGv1FYusCo-bEPDbBx/view?usp=sharing))
+**LiDAR Annotation SemanticKITTI Format** ([Download 174MB](https://drive.google.com/file/d/12bsblHXtob60KrjV7lGXUQTdC5PhV8Er/view?usp=sharing))
 
-**LiDAR Scan Poses files** ([Download 174MB](https://drive.google.com/file/d/1cyVqJEnlzO9ANOP7hU8GJk28ckPDUSGv/view?usp=sharing))
+**LiDAR Scan Poses files** ([Download 174MB](https://drive.google.com/file/d/1V3PT_NJhA41N7TBLp5AbW31d0ztQDQOX/view?usp=sharing))
 
 **LiDAR Split File** ([75KB](https://drive.google.com/file/d/1raQJPySyqDaHpc53KPnJVl3Bln6HlcVS/view?usp=sharing)) 
 
@@ -237,10 +243,6 @@ To run cartographer on RELLIS-3D please refer to [here](https://github.com/unman
 ## License
 All datasets and code on this page are copyright by us and published under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License. 
 
-## Updates
-* 11/26/2020 v1.0 release
-* 02/25/2021 improve camera and lidar calibration parameter
-* 03/04/2021 update ROS bag with new tf (v1.1 release)
 
 ## Related Work
 

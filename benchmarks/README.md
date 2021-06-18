@@ -5,9 +5,6 @@ The HRNet, SalsaNext and KPConv can use environment file ```requirement.txt```. 
 ## Image Semantic Segmenation 
 **Note: New script for evaluate the results is available for [point cloud](https://github.com/unmannedlab/RELLIS-3D/blob/main/utils/Evaluate_pt.ipynb) and [image](https://github.com/unmannedlab/RELLIS-3D/blob/main/utils/Evaluate_img.ipynb)**
 
-**Note: if you used your script the evalutate results.You may need to use this [script](https://github.com/unmannedlab/RELLIS-3D/blob/main/utils/Evaluate_img.ipynb).**
-
-
 ### HRNet+OCR
 The HRNext+OCR is a fork from [https://github.com/HRNet/HRNet-Semantic-Segmentation/tree/HRNet-OCR](https://github.com/HRNet/HRNet-Semantic-Segmentation/tree/HRNet-OCR)
 

@@ -37,6 +37,7 @@ class Rellis(BaseDataset):
 
         self.root = root
         self.list_path = list_path
+        self.crop_size = crop_size
         self.num_classes = num_classes
 
         self.multi_scale = multi_scale
@@ -119,9 +120,11 @@ class Rellis(BaseDataset):
         size = image.shape
 
         if 'test' in self.list_path:
+            new_h, new_w = self.crop_size 
+            image = cv2.resize(image, (new_w, new_h),
+                                interpolation=cv2.INTER_LINEAR)
             image = self.input_transform(image)
             image = image.transpose((2, 0, 1))
-
             return image.copy(), np.array(size), item["img"]
 
         label = np.array(Image.open(os.path.join(self.root, item["label"])))

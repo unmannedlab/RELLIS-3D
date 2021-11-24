@@ -24,7 +24,7 @@ Semantic scene understanding is crucial for robust and safe autonomous navigatio
 ### Sensor Setup
 * 64 channels Lidar: [Ouster OS1](https://ouster.com/products/os1-lidar-sensor)
 * 32 Channels Lidar: [Velodyne Ultra Puck](https://velodynelidar.com/vlp-32c.html)
-* 3D Stereo Camera: [Nerian Karmin2](https://nerian.com/products/karmin2-3d-stereo-camera/) + [Nerian SceneScan](https://nerian.com/products/scenescan-stereo-vision/)
+* 3D Stereo Camera: [Nerian Karmin2](https://nerian.com/products/karmin2-3d-stereo-camera/) + [Nerian SceneScan](https://nerian.com/products/scenescan-stereo-vision/) [(Sensor Configuration)](https://nerian.com/support/calculator/?1,10,0,6,2,1600,1200,1,1,1,800,592,1,6,2,0,61.4,0,0,1,1,0,5,0,0,0,0.66,0,1,25,1,0,1,256,0.25,256,4.0,5.0,0,1.5,1,#results)
 * RGB Camera: [Basler acA1920-50gc](https://www.baslerweb.com/en/products/cameras/area-scan-cameras/ace/aca1920-50gc/) + [Edmund Optics 16mm/F1.8 86-571](https://www.edmundoptics.com/p/16mm-focal-length-hp-series-fixed-focal-length-lens/28990/)
 * Inertial Navigation System (GPS/IMU): [Vectornav VN-300 Dual Antenna GNSS/INS](https://www.vectornav.com/products/vn-300)
 

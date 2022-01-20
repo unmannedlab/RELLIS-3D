@@ -42,7 +42,7 @@ Rellis-3D
 ├── pt_train.lst
 ├── pt_val.lst
 ├── 00000
-      ├── os1_cloud_node_kitti_bin/             -- directory containing ".bin" files with Velodyne point clouds.   
+      ├── os1_cloud_node_kitti_bin/             -- directory containing ".bin" files with Ouster 64-Channels point clouds.   
       ├── os1_cloud_node_semantickitti_label_id/     -- label directory, will be generated if not present.  
       ├── pylon_camera_node/    -- directory containing ".png" files from the color   camera.  
       ├── pylon_camera_node_label_color -- color image lable

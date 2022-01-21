@@ -1,13 +1,14 @@
 from json import load
 import numpy as np
-from plyfile import PlyData, PlyElement
+from plyreader import PlyReader
 
 def load_from_bin(bin_path):
     obj = np.fromfile(bin_path, dtype=np.float32).reshape(-1, 4)
     return obj
 
 def convert_ply2bin(ply_path,bin_path=None):
-    plydata = PlyData.read(ply_path)
+    pr = PlyReader()
+    plydata = pr.open(ply_path)
     vertex =plydata['vertex']
     x,y,z,i= vertex['x'],vertex['y'],vertex['z'],vertex['intensity']/65535
     pcd = np.stack([x,y,z,i],axis=1)

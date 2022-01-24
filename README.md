@@ -12,7 +12,7 @@ Peng Jiang<sup>1</sup>, Philip Osteen<sup>2</sup>, Maggie Wigness<sup>2</sup> an
 * 02/25/2021 improve camera and lidar calibration parameter
 * 03/04/2021 update ROS bag with new tf (v1.1 release)
 * 06/14/2021 fix missing labels of point cloud and fix wrong poses
-
+* 01/24/2022 add Velodyne point clouds in kitti format and labels transfered from Ouster
 ## Overview
 Semantic scene understanding is crucial for robust and safe autonomous navigation, particularly so in off-road environments. Recent deep learning advances for 3D semantic segmentation rely heavily on large sets of training data; however, existing autonomy datasets represent urban environments or lack multimodal off-road data. We fill this gap with RELLIS-3D, a multimodal dataset collected in an off-road environment containing annotations for **13,556 LiDAR scans** and **6,235 images**. The data was collected on the Rellis Campus of Texas A\&M University and presents challenges to existing algorithms related to class imbalance and environmental topography. Additionally, we evaluate the current state of the art deep learning semantic segmentation models on this dataset. Experimental results show that RELLIS-3D presents challenges for algorithms designed for segmentation in urban environments. Except for the annotated data, the dataset also provides full-stack sensor data in ROS bag format, including **RGB camera images**, **LiDAR point clouds**, **a pair of stereo images**, **high-precision GPS measurement**, and **IMU data**. This novel dataset provides the resources needed by researchers to develop more advanced algorithms and investigate new research directions to enhance autonomous navigation in off-road environments.
 
@@ -43,7 +43,9 @@ Rellis-3D
 ├── pt_val.lst
 ├── 00000
       ├── os1_cloud_node_kitti_bin/             -- directory containing ".bin" files with Ouster 64-Channels point clouds.   
-      ├── os1_cloud_node_semantickitti_label_id/     -- label directory, will be generated if not present.  
+      ├── os1_cloud_node_semantickitti_label_id/     -- containing, ".label" files for Ouster Lidar point cloud with  manually labelled semantics label
+      ├── vel_cloud_node_kitti_bin/             -- directory containing ".bin" files with Velodyne 32-Channels point clouds.   
+      ├── vel_cloud_node_semantickitti_label_id/     -- containing, ".label" files for Velodyne Lidar point cloud transfered from Ouster point cloud.
       ├── pylon_camera_node/    -- directory containing ".png" files from the color   camera.  
       ├── pylon_camera_node_label_color -- color image lable
       ├── pylon_camera_node_label_id -- id image lable
@@ -82,9 +84,9 @@ With the goal of providing multi-modal data to enhance autonomous off-road navig
 
 ### LiDAR Download: 
 
-**LiDAR with Annotation Examples** ([Download 24MB](https://drive.google.com/file/d/1QikPnpmxneyCuwefr6m50fBOSB2ny4LC/view?usp=sharing)) 
+**Ouster LiDAR with Annotation Examples** ([Download 24MB](https://drive.google.com/file/d/1QikPnpmxneyCuwefr6m50fBOSB2ny4LC/view?usp=sharing)) 
 
-**LiDAR with Color Annotation PLY Format** ([Download 26GB](https://drive.google.com/file/d/1BZWrPOeLhbVItdN0xhzolfsABr6ymsRr/view?usp=sharing))
+**Ouster LiDAR with Color Annotation PLY Format** ([Download 26GB](https://drive.google.com/file/d/1BZWrPOeLhbVItdN0xhzolfsABr6ymsRr/view?usp=sharing))
 
 The header of the PLY file is described as followed:
 ```
@@ -106,15 +108,21 @@ property uchar blue
 To visualize the color of the ply file, please use [CloudCompare](https://www.danielgm.net/cc/) or [Open3D](http://www.open3d.org/). Meshlab has problem to visualize the color.
 
 
-**LiDAR SemanticKITTI Format** ([Download 14GB](https://drive.google.com/file/d/1lDSVRf_kZrD0zHHMsKJ0V1GN9QATR4wH/view?usp=sharing))
+**Ouster LiDAR SemanticKITTI Format** ([Download 14GB](https://drive.google.com/file/d/1lDSVRf_kZrD0zHHMsKJ0V1GN9QATR4wH/view?usp=sharing))
 
 To visualize the datasets using the SemanticKITTI tools, please use this fork: [https://github.com/unmannedlab/point_labeler](https://github.com/unmannedlab/point_labeler)
 
-**LiDAR Annotation SemanticKITTI Format** ([Download 174MB](https://drive.google.com/file/d/12bsblHXtob60KrjV7lGXUQTdC5PhV8Er/view?usp=sharing))
+**Ouster LiDAR Annotation SemanticKITTI Format** ([Download 174MB](https://drive.google.com/file/d/12bsblHXtob60KrjV7lGXUQTdC5PhV8Er/view?usp=sharing))
 
-**LiDAR Scan Poses files** ([Download 174MB](https://drive.google.com/file/d/1V3PT_NJhA41N7TBLp5AbW31d0ztQDQOX/view?usp=sharing))
+**Ouster LiDAR Scan Poses files** ([Download 174MB](https://drive.google.com/file/d/1V3PT_NJhA41N7TBLp5AbW31d0ztQDQOX/view?usp=sharing))
 
-**LiDAR Split File** ([75KB](https://drive.google.com/file/d/1raQJPySyqDaHpc53KPnJVl3Bln6HlcVS/view?usp=sharing)) 
+**Ouster LiDAR Split File** ([75KB](https://drive.google.com/file/d/1raQJPySyqDaHpc53KPnJVl3Bln6HlcVS/view?usp=sharing)) 
+
+
+**Velodyne LiDAR SemanticKITTI Format** ([Download 5.58GB](https://drive.google.com/file/d/1PiQgPQtJJZIpXumuHSig5Y6kxhAzz1cz/view?usp=sharing))
+
+
+**Velodyne LiDAR Annotation SemanticKITTI Format** ([Download 143.6MB](https://drive.google.com/file/d/1n-9FkpiH4QUP7n0PnQBp-s7nzbSzmxp8/view?usp=sharing))
 
 ### Calibration Download: 
 **Camera Instrinsic** ([Download 2KB](https://drive.google.com/file/d/1NAigZTJYocRSOTfgFBddZYnDsI_CSpwK/view?usp=sharing))

@@ -127,7 +127,9 @@ To visualize the datasets using the SemanticKITTI tools, please use this fork: [
 ### Calibration Download: 
 **Camera Instrinsic** ([Download 2KB](https://drive.google.com/file/d/1NAigZTJYocRSOTfgFBddZYnDsI_CSpwK/view?usp=sharing))
 
-**Camera to LiDAR** ([Download 3KB](https://drive.google.com/file/d/19EOqWS9fDUFp4nsBrMCa69xs9LgIlS2e/view?usp=sharing))
+**Basler Camera to Ouster LiDAR** ([Download 3KB](https://drive.google.com/file/d/19EOqWS9fDUFp4nsBrMCa69xs9LgIlS2e/view?usp=sharing))
+
+**Velodyne LiDAR to Ouster LiDAR** ([Download 3KB](https://drive.google.com/file/d/1T6yPwcdzJoU-ifFRelLtDLPuPQswIQwf/view?usp=sharing))
 
 **Calibration Raw Data** ([Download 774MB](https://drive.google.com/drive/folders/1VAb-98lh6HWEe_EKLhUC1Xle0jkpp2Fl?usp=sharing
 ))

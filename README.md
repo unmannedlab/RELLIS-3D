@@ -53,6 +53,9 @@ Rellis-3D
       └── poses.txt             -- file containing the poses of every scan.
 </pre>
 
+## Download Link on BaiDu Pan:
+链接: https://pan.baidu.com/s/1akqSm7mpIMyUJhn_qwg3-w?pwd=4gk3 提取码: 4gk3 复制这段内容后打开百度网盘手机App，操作更方便哦
+
 ## Annotated Data:
 ### Ontology:
 With the goal of providing multi-modal data to enhance autonomous off-road navigation, we defined an ontology of object and terrain classes, which largely derives from [the RUGD dataset](http://rugd.vision/) but also includes unique terrain and object classes not present in RUGD. Specifically, sequences from this dataset includes classes such as mud, man-made barriers, and rubble piles. Additionally, this dataset provides a finer-grained class structure for water sources, i.e., puddle and deep water, as these two classes present different traversability scenarios for most robotic platforms. Overall, 20 classes (including void class) are present in the data.
